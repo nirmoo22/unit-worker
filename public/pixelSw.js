@@ -15,6 +15,7 @@ const handleInstallEvent = (event) => {
       return cache.addAll([
         '/',
         '/index.html',
+        '/favicon.ico',
         '/stylesheets/style.css',
         '/javascripts/main.js',
       ]);
@@ -31,9 +32,14 @@ const handleActivateEvent = (event) => {
 const fetchInterceptor = (event) => {
   if (event.request.url.indexOf('pixel.gif') !== -1) {
     handlePixelRequest(event)
+  } else {
+    event.respondWith(
+      fetch(event.request).catch(function() {
+        return caches.match(event.request);
+      })
+    );
   }
 }
-
 
 /**
  * Handles all request for /pixel.gif
