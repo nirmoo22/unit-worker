@@ -1,3 +1,6 @@
+import { get } from "./utils/communication.js";
+import constants from './constants.js';
+
 class ClickManager {
 
   constructor() {
@@ -21,9 +24,31 @@ class ClickManager {
     })
   }
 
+  /**
+   * 
+   * @param {Event} event 
+   */
   handleButtonClicked(event) {
-    console.log(this)
-    console.log('Button click event for ', event.target.id);
+    get(
+      constants.defaultApiHost + constants.endPoints.pixel,
+      this.getDataForButtonClick(event.target.id)
+    )
+  }
+
+  /**
+   * 
+   * @param {String} btnId 
+   */
+  getDataForButtonClick(btnId) {
+    return {
+      interaction: 'UserClick',
+      client: 'ad_media',
+      os_name: navigator.platform,
+      x1: navigator.vendor,
+      x2: 'web',
+      x3: btnId,
+      landing_url: window.location.host,
+    }
   }
 
 }

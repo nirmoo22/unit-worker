@@ -1,6 +1,8 @@
-export default constants = {
+const constants = {
   defaultApiHost: window.location.origin,
   endPoints: {
-    pixel: '/pixel.gif/'
+    pixel: '/pixel.gif'
   },
 }
+
+export default constants;
