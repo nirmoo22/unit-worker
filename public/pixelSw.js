@@ -82,7 +82,7 @@ const cacheJsFiles = (event) => {
           })
           .catch(() => handleNoNetwork(event))
       })
-      .catch(err => console.log('Could not open cache'))
+      .catch(err => console.log('Could not open cache ', err))
   );
 }
 
