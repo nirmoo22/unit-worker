@@ -1,11 +1,10 @@
-if (navigator.serviceWorker) {
-  navigator.serviceWorker
-    .register('pixelSw.js', { scope: '/' })
-    .then((registration) => {
-      console.log('Service worker registered for', registration.scope);
-    }).catch((error) => {
-      console.log('Service worker registration failed ', error);
-    });
-} else {
-  console.log('Service workers are not supported');
-}
+import SwHelper from './utils/SwHelper.js';
+import ClickManager from './ClickManager.js';
+
+
+(() => {
+  const swHelper = new SwHelper()
+  const clickManager = new ClickManager();
+
+  swHelper.registerWorker();
+})()
