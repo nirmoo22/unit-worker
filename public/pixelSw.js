@@ -32,11 +32,13 @@ const handleActivateEvent = (event) => {
 const fetchInterceptor = (event) => {
   if (event.request.url.indexOf('pixel.gif') !== -1) {
     handlePixelRequest(event)
-  } else {
+  } else if (event.request.url.indexOf('/javascripts/') !== -1) {
+    cacheJsFiles(event);
+  }
+  else {
     event.respondWith(
-      fetch(event.request).catch(function() {
-        return caches.match(event.request);
-      })
+      fetch(event.request)
+        .catch(() => handleNoNetwork(event))
     );
   }
 }
@@ -63,6 +65,29 @@ const handlePixelRequest = (event) => {
   }
   requestUrl.search = new URLSearchParams(newSearchParams).toString();
   fetch(requestUrl)
+}
+
+/**
+ * Caches all the JS files which are requested by the module loader
+ * @param {Event} event 
+ */
+const cacheJsFiles = (event) => {
+  event.respondWith(
+    caches.open('cache-v1')
+      .then((cache) => {
+        return fetch(event.request)
+          .then((response) => {
+            cache.put(event.request, response.clone());
+            return response;
+          })
+          .catch(() => handleNoNetwork(event))
+      })
+      .catch(err => console.log('Could not open cache'))
+  );
+}
+
+const handleNoNetwork = (event) => {
+  return caches.match(event.request);
 }
 
 
