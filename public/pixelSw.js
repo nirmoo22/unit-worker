@@ -41,8 +41,10 @@ const fetchInterceptor = (event) => {
  */
 const handlePixelRequest = (event) => {
   event.respondWith(
-    new Response('Response from Service Worker :)', {
-      headers: { 'Content-Type': 'text/plain' }
+    new Response(JSON.stringify({
+      msg: 'Response from Service Worker :)'
+    }), {
+      headers: { 'Content-Type': 'application/json' }
     })
   );
 

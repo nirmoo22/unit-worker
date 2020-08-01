@@ -33,6 +33,17 @@ class ClickManager {
       constants.defaultApiHost + constants.endPoints.pixel,
       this.getDataForButtonClick(event.target.id)
     )
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          console.log('Error getting response status: ', res.status);
+        }
+      })
+      .then(result => {
+        console.log('Response from worker:', result.msg)
+      })
+
   }
 
   /**
