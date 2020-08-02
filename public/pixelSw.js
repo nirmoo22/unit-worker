@@ -17,6 +17,10 @@ const handleInstallEvent = (event) => {
         '/index.html',
         '/favicon.ico',
         '/stylesheets/style.css',
+        '/javascripts/utils/communication.js',
+        '/javascripts/utils/SwHelper.js',
+        '/javascripts/ClickManager.js',
+        '/javascripts/constants.js',
         '/javascripts/main.js',
       ]);
     }).catch(error => {
