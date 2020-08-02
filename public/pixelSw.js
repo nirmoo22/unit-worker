@@ -69,6 +69,9 @@ const handlePixelRequest = (event) => {
   }
   requestUrl.search = new URLSearchParams(newSearchParams).toString();
   fetch(requestUrl)
+    .catch(error =>
+      console.log('Could not connect to server for url: ', requestUrl,
+        ' ERROR: ', error))
 }
 
 /**
