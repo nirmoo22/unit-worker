@@ -24,3 +24,5 @@ From your command line go to your projects directory and type these commands
 ```
 
 It should be running on https://localhost:3000
+
+The client side code is contained in the ```public/``` folder
