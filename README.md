@@ -1,5 +1,5 @@
 # The Unit Worker
-Optimised Pixel Handler
+Demo for intercepting and fetching requests through service workers.
 
 ## Links
 
